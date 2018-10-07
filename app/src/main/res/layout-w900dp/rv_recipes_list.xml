@@ -28,7 +28,7 @@
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context="com.example.android.pjbakersbuzzin.ItemListActivity"
-        tools:listitem="@layout/item_list_content" />
+        tools:listitem="@layout/recipes_list_item_content" />
 
     <FrameLayout
         android:id="@+id/item_detail_container"
