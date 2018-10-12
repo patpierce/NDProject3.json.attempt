@@ -93,7 +93,23 @@ public class ItemListActivity extends AppCompatActivity {
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String recipeId = (String) view.getTag();
+                int tag = (int) view.getTag();
+//                RecipeEntry recipeEntry = new RecipeEntry  (
+//                        mRecipeData[recipeId][0],
+//                        mRecipeData[recipeId][1],
+//                        mRecipeData[recipeId][2],
+//                        mRecipeData[recipeId][3],
+//                        mRecipeData[recipeId][4],
+//                        mRecipeData[recipeId][5]
+//                );
+//                RecipeEntry recipeEntry = new RecipeEntry  (
+                String recipenum = mRecipeData[tag][0];
+                String name = mRecipeData[tag][1];
+                String ingredients = mRecipeData[tag][2];
+                String steps = mRecipeData[tag][3];
+                String servings = mRecipeData[tag][4];
+                String image = mRecipeData[tag][5];
+//                );
 //                if (mTwoPane) {
 //                    Bundle arguments = new Bundle();
 //                    arguments.putString(ItemDetailFragment.ARG_ITEM_ID, item.id);
@@ -103,11 +119,18 @@ public class ItemListActivity extends AppCompatActivity {
 //                            .replace(R.id.item_detail_container, fragment)
 //                            .commit();
 //                } else {
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, ItemDetailActivity.class);
-                    intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, recipeId);
-
-                    context.startActivity(intent);
+                Context context = view.getContext();
+                Intent intent = new Intent(context, ItemDetailActivity.class);
+//                intent.putExtra(ItemDetailFragment.ARG_ITEM_ID, recipeId);
+                intent.putExtra("RecipeEntry",
+                        new RecipeEntry(
+                                recipenum,
+                                name,
+                                ingredients,
+                                steps,
+                                servings,
+                                image));
+                context.startActivity(intent);
 //                }
             }
         };
@@ -141,7 +164,7 @@ public class ItemListActivity extends AppCompatActivity {
             Context context = holder.mRecipeImageView.getContext();
             Glide.with(context).load(imageUrl)
                     .placeholder(R.drawable.ic_kitchen).into(holder.mRecipeImageView);
-            holder.itemView.setTag(mRecipeData[position][0]);
+            holder.itemView.setTag(position);
             holder.itemView.setOnClickListener(mOnClickListener);
         }
 

@@ -1,15 +1,33 @@
 package com.example.android.pjbakersbuzzin;
 
-public class RecipesList {
-    private String id;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class RecipeEntry implements Parcelable {
+
+    public static final Creator<RecipeEntry> CREATOR = new Creator<RecipeEntry>() {
+        @Override
+        public RecipeEntry createFromParcel(Parcel in) {
+            return new RecipeEntry(in);
+        }
+
+        @Override
+        public RecipeEntry[] newArray(int size) {
+            return new RecipeEntry[size];
+        }
+    };
+
+    private String recipeId;
     private String name;
     private String ingredients;
     private String steps;
     private String servings;
     private String image;
 
-    public RecipesList(String id, String name, String ingredients, String steps, String servings, String image) {
-        this.id = id;
+    // Constructor
+    public RecipeEntry(String recipeId, String name, String ingredients,
+                       String steps, String servings, String image) {
+        this.recipeId = recipeId;
         this.name = name;
         this.ingredients = ingredients;
         this.steps = steps;
@@ -18,11 +36,11 @@ public class RecipesList {
     }
 
     public String getId() {
-        return id;
+        return recipeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String recipeId) {
+        this.recipeId = recipeId;
     }
 
     public String getName() {
@@ -65,6 +83,42 @@ public class RecipesList {
         this.image = image;
     }
 
+    // Parcelling part
+    private RecipeEntry(Parcel in) {
+        this.recipeId = in.readString();
+        this.name = in.readString();
+        this.ingredients = in.readString();
+        this.steps = in.readString();
+        this.servings = in.readString();
+        this.image = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int i) {
+        dest.writeString(this.recipeId);
+        dest.writeString(this.name);
+        dest.writeString(this.ingredients);
+        dest.writeString(this.steps);
+        dest.writeString(this.servings);
+        dest.writeString(this.image);
+    }
+
+    @Override
+    public String toString() {
+        return "MovieEntry{" +
+                "recipeId='" + recipeId + '\'' +
+                ", name='" + name + '\'' +
+                ", ingredients='" + ingredients + '\'' +
+                ", steps='" + steps + '\'' +
+                ", servings='" + servings + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }
 
 //public class IngredientsList {

@@ -16,23 +16,6 @@ public final class NetworkUtils {
 
     private NetworkUtils() { }
 
-//    public static URL buildMainUrl(String sortOrder, String apiKey) {
-//    public static URL buildMainUrl() {
-//        Uri builtUri = Uri.parse(RECIPE_LIST_URL).buildUpon()
-////                .appendPath(sortOrder)
-////                .appendQueryParameter(API_KEY_PARAM, apiKey)
-//                .build();
-//
-//        URL url = null;
-//        try {
-//            url = new URL(builtUri.toString());
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return url;
-//    }
-
     /**
      * This method returns the entire result from the HTTP response.
      *
